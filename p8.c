@@ -1,41 +1,67 @@
 #include <stdio.h>
-int main()
-{
+void findStringLength() {
+    char str[100];
+    char *ptr = str;
+    int length = 0;
 
-    char str[90], *pt;
-    int i = 0;
-    printf("Enter Any string:  ");
-    scanf("%s",str);
-    pt = str;
-    while (*pt != '\0')
-    {
-        i++;
-        pt++;
+    printf("\nEnter any string: ");
+    fflush(stdin);
+    gets(str);
+
+    while (*ptr != '\0') {
+        length++;
+        ptr++;
     }
-    printf("Length of String : %d", i);
 
-    int arr[2][2];
-    for (int i = 0; i < 2; i++)
-    {
-        for (int j = 0; j < 2; j++)
-        {
-            printf("\n\nEnter number for row %d col %d: " ,i+1,j+1);
-            scanf("%d",&arr[i][j]);
+    printf("The length of the string is: %d\n", length);
+}
+void findCubes(int *ptr, int size) {
+    printf("\nCubes of all elements:\n");
+    for (int i = 0; i < size * size; i++) {
+        printf("%d ", (*ptr) * (*ptr) * (*ptr));
+        ptr++;
+        if (i % size == size - 1)
+            printf("\n");
+    }
+}
 
+void cubeGenerator() {
+    int size;
+    printf("Enter array's size: ");
+    scanf("%d", &size);
+   int arr[size][size];
+    printf("\nEnter array elements:\n");
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("a[%d][%d] = ", i, j);
+            scanf("%d", &arr[i][j]);
         }
-        
     }
+    findCubes(&arr[0][0], size);
+}
 
-     for (int i = 0; i < 2; i++)
-    {
-        for (int j = 0; j < 2;)
-        {
-            printf("|%d|",arr[i][j]);
+int main() {
+    int choice;
+    while (1) {
+        printf("\n\n===== MENU =====\n");
+        printf("1. Length Finder (Q1)\n");
+        printf("2. Cubes Generator (Q2)\n");
+        printf("0. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-
+        switch (choice) {
+            case 1:
+                findStringLength();
+                break;
+            case 2:
+                cubeGenerator();
+                break;
+            case 0:
+                printf("Exiting program...\n");
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
         }
-        printf("\n");
     }
-
-    return 0;
 }
